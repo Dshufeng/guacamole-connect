@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+   
+</style>
+</head>
+<body>
+<!-- Guacamole -->
+        
+        <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript"
+        src="guac.js"></script>
+        <!-- Display -->
+        <div>
+            <button id="sendCtrlAltDel">sendCtrlAltDel</button>
+        </div>
+        <div id="display" style="">
+            
+        </div>
+        <!-- Init -->
+        <script type="text/javascript"> /* <![CDATA[ */
+            // Get display div from document
+            var display = document.getElementById("display");
+            // Instantiate client, using an HTTP tunnel for communications.
+          
+            var guac = new Guacamole.Client(
+                new Guacamole.WebSocketTunnel("ws://192.168.1.209:8080")
+            );
+            var dis = guac.getDisplay().getElement();
+
+            // Add client to display div
+            display.appendChild(dis);
+            
+            // Error handler
+            guac.onerror = function(error) {
+                console.log(error);
+            };
+
+            // Connect
+            guac.connect('token=eyJpdiI6Ik1UUXlZakpoTjJZellqUXpaR001TlE9PSIsInZhbHVlIjoiZ2tKUFRnY1o1QVhTMlwvb2pyUVJRUTNnNFRxRGdcL1ZEUGdtWXU4VUNacjJuYkE2aWVQUmN3OE5DVWl1bWtvSDM3XC9zd0pNT1BuQVJNUE1yMU5GSjN5TFFlTFwva1VFOFhoUm4reUpHQmNUTzZZYUQ5NFhkZGFQaWhva1k1TVh0UXZjYVZjSjErMDE3ZWppd2tFWGlIRVloWjNHY3VwWnNmNU1zSmZxcHNGVTJxQT0ifQ==');
+           
+            // Disconnect on close
+            window.onunload = function() {
+                guac.disconnect();
+            }
+            
+
+        /* ]]> */ </script>
+        <script type="text/javascript"> /* <![CDATA[ */
+           
+            dis = guac.getDisplay();
+            function sendScaledMouseState(mouseState) {
+                var scaledState = new Guacamole.Mouse.State(
+                    mouseState.x / dis.getScale(),
+                    mouseState.y / dis.getScale(),
+                    mouseState.left,
+                    mouseState.middle,
+                    mouseState.right,
+                    mouseState.up,
+                    mouseState.down
+                );
+                guac.sendMouseState(scaledState);
+            }
+          
+            $('#sendCtrlAltDel').on("click", function () {
+                var KEYSYM_CTRL   = 0xFFE3;
+                var KEYSYM_ALT    = 0xFFE9;
+                var KEYSYM_DELETE = 0xFFFF;
+                guac.sendKeyEvent(1, KEYSYM_CTRL);
+                guac.sendKeyEvent(1, KEYSYM_ALT);
+                guac.sendKeyEvent(1, KEYSYM_DELETE);
+                guac.sendKeyEvent(0, KEYSYM_DELETE);
+                guac.sendKeyEvent(0, KEYSYM_ALT);
+                guac.sendKeyEvent(0, KEYSYM_CTRL);
+            });
+            // Mouse
+            var mouse = new Guacamole.Mouse(guac.getDisplay().getElement());
+            
+            mouse.onmousedown = 
+            mouse.onmouseup   =
+            mouse.onmousemove = function(mouseState) {
+                sendScaledMouseState(mouseState);
+                dis.showCursor(false);
+            };
+
+            // Keyboard
+            var keyboard = new Guacamole.Keyboard(document);
+
+            keyboard.onkeydown = function (keysym) {
+                guac.sendKeyEvent(1, keysym);
+            };
+
+            keyboard.onkeyup = function (keysym) {
+                guac.sendKeyEvent(0, keysym);
+            };
+
+        /* ]]> */ </script>
+</body>
+</html>

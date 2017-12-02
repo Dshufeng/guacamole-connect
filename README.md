@@ -1,10 +1,10 @@
 # go-to-guac
-the docker guacamole example
+the docker guacamole test, you can get web VNC by WebSocket,and also other proxy in your brower.
 
 ## how to
 
 * start docker api
-* get token of you vnc or other proxy
+* get token of you vnc or other proxy(e.g. rdp telnet ssh)
 * include script jQuery and all.min.js
 * at last, you will take it on you screen :)
 
@@ -19,7 +19,8 @@ docker run -d -p 8080:8080 docker.io/dongshufeng/my-guacamole
 ### token test by PHP
 
 ```
- 	$config = [
+
+    $config = [
         "connection"=>[
             "type"=>"vnc",
             "settings"=>[
@@ -77,3 +78,12 @@ docker run -d -p 8080:8080 docker.io/dongshufeng/my-guacamole
 	// Connect
 	guac.connect('token='+token);
 ```
+
+
+##　Doument and API of guacamole
+
+http://guacamole.apache.org/
+
+##　Inspired
+
+https://github.com/vadimpronin/guacamole-lite
