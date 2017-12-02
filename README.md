@@ -1,5 +1,5 @@
 # go-to-guac
-the docker guacamole test, you can get web VNC by WebSocket,and also other proxy in your brower.
+the docker guacamole test, you can get web VNC by WebSocket,and also other proxy in your browser.
 
 ## how to
 
@@ -10,7 +10,7 @@ the docker guacamole test, you can get web VNC by WebSocket,and also other proxy
 
 
 
-### start docker api
+### start docker
 ```
 docker run -d -p 8080:8080 docker.io/dongshufeng/my-guacamole
 
@@ -84,6 +84,6 @@ docker run -d -p 8080:8080 docker.io/dongshufeng/my-guacamole
 
 http://guacamole.apache.org/
 
-##　Inspired
+##　Inspired and Thx
 
 https://github.com/vadimpronin/guacamole-lite
