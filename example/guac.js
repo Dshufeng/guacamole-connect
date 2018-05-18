@@ -602,9 +602,12 @@ Guacamole.Client = function (D) {
 		end : function (I) {
 			var K = parseInt(I[0]);
 			var J = u[K];
-			if (J.onend) {
-				J.onend()
-			}
+			if(J){
+			    if(J.onend) {
+			        J.onend();
+			        delete u[K];
+			    }
+		        }
 		},
 		file : function (K) {
 			var M = parseInt(K[0]);
