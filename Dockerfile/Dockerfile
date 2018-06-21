@@ -6,8 +6,8 @@ USER root
 RUN yum clean all && \
     rm -rf /var/cache/yum/*
 
-RUN yum install -y nodejs npm \
-    yum install -y supervisor \
+RUN yum install -y nodejs npm && \
+    yum install -y supervisor && \
     rm -rf /var/cache/yum/*
 
 RUN npm install --save guacamole-lite
