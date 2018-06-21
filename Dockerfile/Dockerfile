@@ -8,12 +8,10 @@ RUN yum clean all && \
     yum install -y nodejs npm \
     yum install -y supervisor \
 
-#RUN sudo mkdir -p /var/log/supervisor
-
-ADD supervisord.ini /etc/supervisord.d/
-COPY guacamole.js /etc/guacamole.js
-
 RUN npm install --save guacamole-lite
+
+COPY ./supervisord.ini /etc/supervisord.d/supervisord.ini
+COPY ./guacamole.js /etc/guacamole.js
 
 EXPOSE 8080
 
