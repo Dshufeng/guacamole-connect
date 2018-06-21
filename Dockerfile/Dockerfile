@@ -10,7 +10,7 @@ RUN yum clean all && \
 
 #RUN sudo mkdir -p /var/log/supervisor
 
-ADD supervisord.conf /etc/supervisord.d/
+ADD supervisord.ini /etc/supervisord.d/
 COPY guacamole.js /etc/guacamole.js
 
 RUN npm install --save guacamole-lite
