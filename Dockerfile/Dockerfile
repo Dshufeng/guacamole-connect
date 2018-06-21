@@ -4,14 +4,16 @@ MAINTAINER dsf
 USER root
 
 RUN yum clean all && \
-    yum update -y && \
-    yum install -y nodejs npm \
+    rm -rf /var/cache/yum/*
+
+RUN yum install -y nodejs npm \
     yum install -y supervisor \
+    rm -rf /var/cache/yum/*
 
 RUN npm install --save guacamole-lite
 
-COPY ./supervisord.ini /etc/supervisord.d/supervisord.ini
-COPY ./guacamole.js /etc/guacamole.js
+ADD guacamole.js /etc/guacamole.js
+ADD supervisord.ini /etc/supervisord.d/supervisord.ini
 
 EXPOSE 8080
 
