@@ -1,0 +1,41 @@
+<configs>
+
+    <!-- test-node ssh connection -->
+    <config name="test-node-ssh" protocol="ssh">
+        <param name="hostname" value="192.168.1.194" />
+        <param name="port" value="22" />
+        <param name="username" value="root" />
+        <param name="password" value="qazwsxdsf" />
+        <param name="enable-stfp" value="true" />
+        <param name="sftp-username" value="root" />
+        <param name="sftp-password" value="qazwsxdsf" />
+        <param name="sftp-root-directory" value="/data" />
+        <param name="sftp-hostname" value="192.168.1.194" />
+    </config>
+
+    <!-- test-node rdp connection -->
+    <config name="test-node-rdp" protocol="rdp">
+        <param name="hostname" value="192.168.1.194" />
+        <param name="port" value="3389" />
+        <param name="username" value="user" />
+        <param name="password" value="changeme" />
+        <param name="enable-stfp" value="true" />
+        <param name="sftp-hostname">127.0.0.1</param>
+        <param name="sftp-root-directory">/data/sftp</param>
+        <param name="sftp-username">sftp</param>
+        <param name="sftp-password">123456</param>
+
+    </config>
+    <!-- test-node vnc connection -->
+    <config name="test-node-vnc" protocol="vnc">
+        <param name="hostname" value="192.168.1.195" />
+        <param name="port" value="5902" />
+        <param name="username" value="admin" />
+        <param name="password" value="123456" />
+        <param name="enable-stfp" value="true" />
+        <param name="sftp-hostname">127.0.0.1</param>
+        <param name="sftp-root-directory">/data/sftp</param>
+        <param name="sftp-username">sftp</param>
+        <param name="sftp-password">123456</param>
+    </config>
+</configs>
