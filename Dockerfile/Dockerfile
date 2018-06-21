@@ -8,7 +8,7 @@ RUN yum clean all && \
     yum install -y nodejs npm \
     yum install -y supervisor \
 
-RUN sudo mkdir -p /var/log/supervisor
+#RUN sudo mkdir -p /var/log/supervisor
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY guacamole.js /etc/guacamole.js
