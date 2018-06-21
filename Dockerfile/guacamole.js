@@ -11,7 +11,7 @@ const guacdOptions = {
 const clientOptions = {
     crypt: {
         cypher: 'AES-256-CBC',
-        key: 'MySuperSecretKeyForParamsToken12'
+        key: process.env.SECRETKEY
     },
     allowedUnencryptedConnectionSettings: {
         vnc: [

@@ -1,7 +1,10 @@
 FROM guacamole/guacd:latest
-MAINTAINER dsf
+
+MAINTAINER dongshufeng <839117348@qq.com>
 
 USER root
+
+ENV SECRETKEY MySuperSecretKeyForParamsToken12
 
 RUN yum clean all && \
     rm -rf /var/cache/yum/*
