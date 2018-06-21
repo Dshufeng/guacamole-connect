@@ -3,69 +3,39 @@ the docker guacamole test, you can get web VNC by WebSocket,and also other proxy
 
 ## how to
 
-* start docker api
-* get token of you vnc or other proxy(e.g. rdp telnet ssh)
-* include script jQuery and all.min.js
+* build or pull form hub.docker.com
+* start docker client
+* get token of you vnc or other proxy(e.g. rdp telnet ssh) by setting
+* include script jQuery and guac.js
 * at last, you will take it on you screen :)
 
+### build docker in Dockerfile
 
+```
+docker build -t "docker.io/dongshufeng/guacamole-connect:latest" .
+```
 
 ### start docker
+
+the env of SecretKey is 32 bytes
+
 ```
-docker run -d -p 8080:8080 docker.io/dongshufeng/my-guacamole
+sh boot.sh <SecretKey>
 
 ```
 
 ### token test by PHP
 
-```
+modiyf $secretKey take from step forward
 
-    $config = [
-        "connection"=>[
-            "type"=>"vnc",
-            "settings"=>[
-                "hostname"=>"192.168.1.209", // the vnc server ip
-                "port"=>5900,				// the vnc server port
-                "password"=>"vncpassword"   // the vnc server psssword
-            ]
-        ]
-    ];
-
-    $iv= substr(md5("cepo"),8,16);
-    $value = \openssl_encrypt(
-        json_encode($config),
-        'AES-256-CBC',
-        'MySuperSecretKeyForParamsToken12',
-        0,
-        $iv
-    );
-
-    if ($value === false) {
-        throw new \Exception('Could not encrypt the data.');
-    }
-
-    $data = [
-        'iv' => base64_encode($iv),
-        'value' => $value,
-    ];
-
-    $json = json_encode($data);
-
-    if (!is_string($json)) {
-        throw new \Exception('Could not encrypt the data.');
-    }
-
-    // you token
-    echo base64_encode($json);
-
-```
+[get token](https://github.com/Dshufeng/guacamole-connect/tree/master/example/guac.php)
 
 ### html and js test
 
 ```
 	var display = $("#you-displayElement-id");
 	var guac = new Guacamole.Client(
-	    new Guacamole.WebSocketTunnel("ws://docker-ip:port");
+	    new Guacamole.WebSocketTunnel("ws://ip:port");
 	);
 
 	display.appendChild(dis);
