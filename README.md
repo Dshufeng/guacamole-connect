@@ -1,7 +1,7 @@
 # guacamole-connect
 the docker guacamole test, you can get web VNC by WebSocket,and also other proxy in your browser.
 
-## how to
+## how to do
 
 * build or pull form hub.docker.com
 * start docker client
